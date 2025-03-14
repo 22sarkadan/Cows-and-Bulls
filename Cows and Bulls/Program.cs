@@ -30,7 +30,7 @@ namespace Cows_and_Bulls
 
 
 
-                if (UcaseMenu == 2)
+                if (UcaseMenu == 2 && tries == 0)
                 {
                     Console.WriteLine("Enter the number of digits you want to play with (3-8):");
                     digitCount = int.Parse(Console.ReadLine());
@@ -77,7 +77,10 @@ namespace Cows_and_Bulls
                     bool UniqueGuess = false;
                     int Bulls = 0;
                     int Cows = 0;
-                    tries = 0;
+                    if (tries == 0)
+                    {
+                        tries = 0;
+                    }
                     bool play = true;
                     bool isvalid = false;
 
