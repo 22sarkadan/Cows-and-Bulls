@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Xml;
 using static System.Formats.Asn1.AsnWriter;
@@ -16,18 +18,49 @@ namespace Cows_and_Bulls
             int tries = 0;
             bool Unique = false;
             char[] Digits = new char[digitCount]; // Added declaration for Digits
+            //the colour menu
+            Console.WriteLine("Do you want to chnage the colour");
+            string colourYN = Console.ReadLine();
+            if (colourYN  == "yes" || colourYN == "y")
+            {
+                Console.WriteLine("Would you like to view the list of valid colours?");
+                string vcol = Console.ReadLine(); 
+                if ( vcol == "yes" || vcol == "y")
+                {
+                    string[] colors = {
+    "Black", "DarkBlue", "DarkGreen", "DarkCyan",
+    "DarkRed", "DarkMagenta", "DarkYellow", "Gray",
+    "DarkGray", "Blue", "Green", "Cyan",
+    "Red", "Magenta", "Yellow", "White"
+};
+
+                }
+                Console.WriteLine("What colour?");
+                string bcolor = Console.ReadLine();
+                for (int i = 0; i <  6; i++)
+                {
+                    Console.Write(".");
+                    Thread.Sleep(1000);
+                }
+                if (Enum.TryParse(bcolor, true, out ConsoleColor chosenColor))
+                {
+                    Console.ForegroundColor = chosenColor; // Change text colour
+                    Console.WriteLine($"The console text is now {chosenColor}!");
+                    Thread.Sleep(1000);
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.WriteLine("Invalid colour. Please enter a valid colour name.");
+                }
+            }
             // the menu
             Console.WriteLine("Select your mode: \r\n (1)Play Standard 4 Gamemode \r\n (2)Change Number of digits \r\n (3)Show top score \r\n (4)Quit");
             int UcaseMenu = int.Parse(Console.ReadLine());
-
+            playagain = true;
             while (playagain)
             {
-                if (tries == 0)
-                {
-                     Unique = false; // Added declaration for Unique
-                        Digits = new char[digitCount]; // Added declaration for Digits
-                }
-
+               
 
 
                 if (UcaseMenu == 2 && tries == 0)
@@ -39,10 +72,12 @@ namespace Cows_and_Bulls
                         Console.WriteLine("Invalid input. Please enter a number between 3 and 8.");
                         digitCount = int.Parse(Console.ReadLine());
                     }
+                    Digits = new char[digitCount];
                 }
                 else if (UcaseMenu == 1)
                 {
                     digitCount = 4;
+                    Digits = new char[digitCount];
                 }
                 else if (UcaseMenu == 3)
                 {
@@ -60,6 +95,7 @@ namespace Cows_and_Bulls
                 {
                     Environment.Exit(0);
                 }
+
                 while (!Unique)
                 {
                     int min = (int)Math.Pow(10, digitCount - 1);
@@ -153,6 +189,7 @@ namespace Cows_and_Bulls
                         tries++;
                         Unique = true;
                     }
+
                 }
             }
 
