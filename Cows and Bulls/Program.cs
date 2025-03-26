@@ -40,11 +40,11 @@ namespace Cows_and_Bulls
                 }
                 Console.WriteLine("What colour?");
                 string bcolor = Console.ReadLine();
-                for (int i = 0; i < 6; i++)
+                /*for (int i = 0; i < 6; i++)
                 {
                     Console.Write(".");
                     Thread.Sleep(1000);
-                }
+                }*/
                 if (Enum.TryParse(bcolor, true, out ConsoleColor chosenColor))
                 {
                     Console.ForegroundColor = chosenColor; // Changes text colour
